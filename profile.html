@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница памяти</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <!-- SVG Wreath Logo -->
+                <svg class="logo-icon" width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="currentColor">
+                        <!-- Left branch -->
+                        <path d="M 15 10 Q 10 15 8 20 Q 10 22 12 20 Q 14 17 15 15 Z" opacity="0.8"/>
+                        <path d="M 12 18 Q 8 22 7 27 Q 9 29 11 27 Q 13 24 13 22 Z" opacity="0.7"/>
+                        <path d="M 10 26 Q 7 30 6 35 Q 8 37 10 35 Q 12 32 11 30 Z" opacity="0.6"/>
+
+                        <!-- Right branch -->
+                        <path d="M 35 10 Q 40 15 42 20 Q 40 22 38 20 Q 36 17 35 15 Z" opacity="0.8"/>
+                        <path d="M 38 18 Q 42 22 43 27 Q 41 29 39 27 Q 37 24 37 22 Z" opacity="0.7"/>
+                        <path d="M 40 26 Q 43 30 44 35 Q 42 37 40 35 Q 38 32 39 30 Z" opacity="0.6"/>
+
+                        <!-- Bottom ribbon -->
+                        <path d="M 15 40 Q 25 42 25 45 Q 25 42 35 40 Q 30 38 25 38 Q 20 38 15 40 Z" opacity="0.9"/>
+                    </g>
+                </svg>
+
+                <div class="logo-text">
+                    <h1>НАЦИОНАЛЬНОЕ ВЕЧНОЕ ХРАНИЛИЩЕ</h1>
+                    <p>Поиск и просмотр памяти о тех, кого уже нет с нами.</p>
+                </div>
+            </div>
+
+            <nav class="header-nav">
+                <a href="#">О проекте</a>
+                <a href="#">Помощь</a>
+                <a href="#">Контакты</a>
+                <button class="profile-icon">👤</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="index.html">← Назад к поиску</a>
+            <button class="favorites">Избранное <span>0</span></button>
+            <a href="#">Контакты</a>
+            <button id="editModeBtn" class="btn btn-secondary" style="margin-left: auto;">Режим редактирования</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="profile-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <section class="sidebar-section">
+                    <h3>Родился</h3>
+                    <div id="birthInfo">
+                        <p class="empty-state">Не указано</p>
+                    </div>
+                    <button class="btn btn-secondary edit-mode-only" id="editBirthBtn" style="margin-top: 8px; width: 100%;">Редактировать</button>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>Учёба</h3>
+                    <div id="educationInfo">
+                        <p class="empty-state">Не указано</p>
+                    </div>
+                    <button class="btn btn-secondary edit-mode-only" id="editEducationBtn" style="margin-top: 8px; width: 100%;">Редактировать</button>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>Карьера</h3>
+                    <div id="careerInfo">
+                        <p class="empty-state">Не указано</p>
+                    </div>
+                    <button class="btn btn-secondary edit-mode-only" id="editCareerBtn" style="margin-top: 8px; width: 100%;">Редактировать</button>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>Семья</h3>
+                    <div id="familyInfo">
+                        <p class="empty-state">Не указано</p>
+                    </div>
+                    <button class="btn btn-secondary edit-mode-only" id="editFamilyBtn" style="margin-top: 8px; width: 100%;">Редактировать</button>
+                </section>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Profile Hero -->
+                <section class="profile-hero">
+                    <div id="profilePhotoContainer" class="profile-photo placeholder">👤</div>
+                    <div class="profile-info">
+                        <h1 id="profileName">Загрузка...</h1>
+                        <p id="profileYears"></p>
+                        <p id="profileLocation"></p>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary">Добавить в избранное</button>
+                        <button class="btn btn-secondary">Возложить цветы</button>
+                        <button class="btn btn-secondary edit-mode-only" id="editProfileBtn">Редактировать профиль</button>
+                    </div>
+                </section>
+
+                <!-- Tabs -->
+                <nav class="tabs">
+                    <button class="tab active" data-tab="bio">Биография</button>
+                    <button class="tab" data-tab="photos">Фото</button>
+                    <button class="tab" data-tab="videos">Видео</button>
+                    <button class="tab" data-tab="comments">Комментарии</button>
+                </nav>
+
+                <!-- Tab Content: Biography -->
+                <section class="tab-content active" id="tab-bio">
+                    <div class="bio-content" id="bioContent">
+                        <p class="empty-state">Биография не добавлена</p>
+                    </div>
+                    <button class="btn btn-secondary edit-mode-only" id="editBioBtn" style="margin-top: 24px;">Редактировать биографию</button>
+                </section>
+
+                <!-- Tab Content: Photos -->
+                <section class="tab-content" id="tab-photos">
+                    <p class="coming-soon">В разработке</p>
+                </section>
+
+                <!-- Tab Content: Videos -->
+                <section class="tab-content" id="tab-videos">
+                    <p class="coming-soon">В разработке</p>
+                </section>
+
+                <!-- Tab Content: Comments -->
+                <section class="tab-content" id="tab-comments">
+                    <p class="coming-soon">В разработке</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal" role="dialog" aria-labelledby="editProfileTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editProfileTitle">Редактировать профиль</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label for="inputName">ФИО <span class="required">*</span></label>
+                        <input type="text" id="inputName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputYears">Годы жизни</label>
+                        <input type="text" id="inputYears" placeholder="1945–2023">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLocation">Место</label>
+                        <input type="text" id="inputLocation" placeholder="Москва, Россия">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputQuote">Цитата или послание</label>
+                        <textarea id="inputQuote" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhoto">Фото (URL или base64)</label>
+                        <input type="text" id="inputPhoto" placeholder="https://example.com/photo.jpg">
+                        <p class="help-text">Вставьте ссылку на изображение</p>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary modal-close-btn">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Biography Modal -->
+    <div class="modal" id="editBioModal" role="dialog" aria-labelledby="editBioTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editBioTitle">Редактировать биографию</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bioForm">
+                    <div class="form-group">
+                        <label for="inputBio">Биография</label>
+                        <textarea id="inputBio" rows="8" placeholder="Расскажите о жизни человека..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRole">Кем был(а)</label>
+                        <textarea id="inputRole" rows="3" placeholder="Профессия, роли в жизни..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLoved">Что любил(а)</label>
+                        <textarea id="inputLoved" rows="3" placeholder="Хобби, интересы..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputKeyMemory">Главное, что важно помнить</label>
+                        <textarea id="inputKeyMemory" rows="3" placeholder="Ключевые воспоминания..."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary modal-close-btn">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Timeline Modal -->
+    <div class="modal" id="editTimelineModal" role="dialog" aria-labelledby="editTimelineTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editTimelineTitle">Редактировать</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="timelineForm">
+                    <div id="timelineFieldsContainer">
+                        <!-- Fields will be generated dynamically -->
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="addTimelineItemBtn" style="margin-bottom: 16px;">+ Добавить запись</button>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary modal-close-btn">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal" role="dialog" aria-labelledby="deleteTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="deleteTitle">Удалить страницу?</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить эту страницу памяти? Это действие нельзя отменить.</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close-btn">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="shared.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

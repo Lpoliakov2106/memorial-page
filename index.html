@@ -3,240 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница памяти</title>
+    <title>Национальное вечное хранилище</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="app-header no-print">
-        <div class="container">
-            <h1 class="app-title">Страница памяти</h1>
-            <div class="controls">
-                <label class="toggle-switch">
-                    <input type="checkbox" id="viewModeToggle">
-                    <span class="toggle-label">Режим просмотра</span>
-                </label>
-                <button id="printBtn" class="btn btn-secondary">Печать</button>
-                <button id="exportBtn" class="btn btn-secondary">Экспорт JSON</button>
-                <button id="importBtn" class="btn btn-secondary">Импорт JSON</button>
-                <button id="resetBtn" class="btn btn-danger">Сбросить демо-данные</button>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <!-- SVG Wreath Logo -->
+                <svg class="logo-icon" width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="currentColor">
+                        <!-- Left branch -->
+                        <path d="M 15 10 Q 10 15 8 20 Q 10 22 12 20 Q 14 17 15 15 Z" opacity="0.8"/>
+                        <path d="M 12 18 Q 8 22 7 27 Q 9 29 11 27 Q 13 24 13 22 Z" opacity="0.7"/>
+                        <path d="M 10 26 Q 7 30 6 35 Q 8 37 10 35 Q 12 32 11 30 Z" opacity="0.6"/>
+
+                        <!-- Right branch -->
+                        <path d="M 35 10 Q 40 15 42 20 Q 40 22 38 20 Q 36 17 35 15 Z" opacity="0.8"/>
+                        <path d="M 38 18 Q 42 22 43 27 Q 41 29 39 27 Q 37 24 37 22 Z" opacity="0.7"/>
+                        <path d="M 40 26 Q 43 30 44 35 Q 42 37 40 35 Q 38 32 39 30 Z" opacity="0.6"/>
+
+                        <!-- Bottom ribbon -->
+                        <path d="M 15 40 Q 25 42 25 45 Q 25 42 35 40 Q 30 38 25 38 Q 20 38 15 40 Z" opacity="0.9"/>
+                    </g>
+                </svg>
+
+                <div class="logo-text">
+                    <h1>НАЦИОНАЛЬНОЕ ВЕЧНОЕ ХРАНИЛИЩЕ</h1>
+                    <p>Поиск и просмотр памяти о тех, кого уже нет с нами.</p>
+                </div>
             </div>
+
+            <nav class="header-nav">
+                <a href="#">О проекте</a>
+                <a href="#">Помощь</a>
+                <a href="#">Контакты</a>
+                <button class="profile-icon">👤</button>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Hero Block -->
-        <section class="hero-section">
-            <figure class="hero-photo">
-                <img id="heroPhoto" src="" alt="Добавьте фото" class="photo-placeholder">
-                <figcaption class="sr-only">Фотография</figcaption>
-            </figure>
-            <div class="hero-info">
-                <h2 id="heroName" class="hero-name">Добавьте имя, чтобы начать</h2>
-                <p id="heroYears" class="hero-years"></p>
-                <blockquote id="heroQuote" class="hero-quote">Добавьте короткое послание или цитату</blockquote>
-                <button id="editProfileBtn" class="btn btn-primary edit-btn">Редактировать профиль</button>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>НАЦИОНАЛЬНОЕ ВЕЧНОЕ ХРАНИЛИЩЕ</h2>
+        <p>Поиск и просмотр памяти о тех, кого уже нет с нами.</p>
 
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="section-header">
-                <h3>О человеке</h3>
-                <button id="editAboutBtn" class="btn btn-secondary edit-btn">Редактировать раздел</button>
-            </div>
-
-            <div class="bio-content">
-                <div class="bio-main">
-                    <h4>Биография</h4>
-                    <p id="bioText" class="bio-text empty-state">Заполните описание</p>
-                </div>
-
-                <div class="bio-structured">
-                    <div class="bio-item">
-                        <h5>Кем был(а)</h5>
-                        <p id="bioRole" class="empty-state">Расскажите, кем был(а)…</p>
-                    </div>
-
-                    <div class="bio-item">
-                        <h5>Что любил(а)</h5>
-                        <p id="bioLoved" class="empty-state">Напишите, что он/она особенно любил(а)…</p>
-                    </div>
-
-                    <div class="bio-item">
-                        <h5>Главное, что важно помнить</h5>
-                        <p id="bioMemory" class="empty-state">Поделитесь тем, что важно сохранить в памяти</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Family Tree Section -->
-        <section class="tree-section">
-            <div class="section-header">
-                <h3>Близкие</h3>
-                <button id="addRelativeBtn" class="btn btn-primary edit-btn">Добавить родственника</button>
-            </div>
-            <div id="familyTree" class="family-tree">
-                <p class="empty-state">Добавьте близких в дерево</p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="app-footer no-print">
-        <div class="container">
-            <p>Страница памяти — MVP для бережного сохранения воспоминаний</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Найти человека..." aria-label="Поиск">
+            <button id="searchBtn">Найти</button>
         </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Pages Grid -->
+        <section class="pages-grid" id="pagesGrid">
+            <!-- Cards will be generated by JavaScript -->
+        </section>
+
+        <!-- Create New Page Button -->
+        <button id="createBtn" class="btn btn-primary btn-create">+ Создать новую страницу памяти</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer no-print" style="text-align: center; padding: 48px 24px; color: #7F8C8D; font-size: 14px;">
+        <p>Национальное вечное хранилище — сервис для сохранения памяти о близких</p>
     </footer>
 
-    <!-- Edit Profile Modal -->
-    <div id="editProfileModal" class="modal" role="dialog" aria-labelledby="editProfileTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="editProfileTitle">Редактировать профиль</h3>
-                <button class="modal-close" aria-label="Закрыть">&times;</button>
-            </div>
-            <form id="editProfileForm" class="modal-body">
-                <div class="form-group">
-                    <label for="profileName">Имя <span class="required">*</span></label>
-                    <input type="text" id="profileName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="profileYears">Годы жизни</label>
-                    <input type="text" id="profileYears" placeholder="например: 1950–2024">
-                </div>
-
-                <div class="form-group">
-                    <label for="profileQuote">Короткая цитата или послание</label>
-                    <textarea id="profileQuote" rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="profilePhoto">Фото (URL или оставьте пустым)</label>
-                    <input type="text" id="profilePhoto" placeholder="https://... или оставьте пустым">
-                </div>
-
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit About Modal -->
-    <div id="editAboutModal" class="modal" role="dialog" aria-labelledby="editAboutTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="editAboutTitle">Редактировать раздел "О человеке"</h3>
-                <button class="modal-close" aria-label="Закрыть">&times;</button>
-            </div>
-            <form id="editAboutForm" class="modal-body">
-                <div class="form-group">
-                    <label for="aboutBio">Биография</label>
-                    <textarea id="aboutBio" rows="5"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="aboutRole">Кем был(а)</label>
-                    <textarea id="aboutRole" rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="aboutLoved">Что любил(а)</label>
-                    <textarea id="aboutLoved" rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="aboutMemory">Главное, что важно помнить</label>
-                    <textarea id="aboutMemory" rows="3"></textarea>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Relative Modal -->
-    <div id="editRelativeModal" class="modal" role="dialog" aria-labelledby="editRelativeTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="editRelativeTitle">Добавить родственника</h3>
-                <button class="modal-close" aria-label="Закрыть">&times;</button>
-            </div>
-            <form id="editRelativeForm" class="modal-body">
-                <input type="hidden" id="relativeId">
-
-                <div class="form-group">
-                    <label for="relativeName">Имя <span class="required">*</span></label>
-                    <input type="text" id="relativeName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="relativeRelation">Тип связи <span class="required">*</span></label>
-                    <select id="relativeRelation" required>
-                        <option value="">Выберите тип связи</option>
-                        <option value="мать">мать</option>
-                        <option value="отец">отец</option>
-                        <option value="партнёр">партнёр</option>
-                        <option value="сын">сын</option>
-                        <option value="дочь">дочь</option>
-                        <option value="брат">брат</option>
-                        <option value="сестра">сестра</option>
-                        <option value="внук">внук</option>
-                        <option value="внучка">внучка</option>
-                        <option value="другое">другое</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="relativeYears">Годы жизни</label>
-                    <input type="text" id="relativeYears" placeholder="например: 1970–2020">
-                </div>
-
-                <div class="form-group">
-                    <label for="relativePhoto">Фото (URL или оставьте пустым)</label>
-                    <input type="text" id="relativePhoto">
-                </div>
-
-                <div class="form-group">
-                    <label for="relativeNote">Комментарий</label>
-                    <input type="text" id="relativeNote" placeholder="например: Жили рядом">
-                </div>
-
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
-                    <button type="button" id="deleteRelativeBtn" class="btn btn-danger" style="display: none;">Удалить</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Import Modal -->
-    <div id="importModal" class="modal" role="dialog" aria-labelledby="importTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="importTitle">Импорт данных</h3>
-                <button class="modal-close" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="importJson">Вставьте JSON данные</label>
-                    <textarea id="importJson" rows="10" placeholder='{"person": {...}, "relatives": [...]}'></textarea>
-                </div>
-                <p class="help-text">Вставьте ранее экспортированный JSON для восстановления данных</p>
-                <div class="modal-actions">
-                    <button type="button" id="importConfirmBtn" class="btn btn-primary">Импортировать</button>
-                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+    <!-- Scripts -->
+    <script src="shared.js"></script>
+    <script src="list.js"></script>
 </body>
 </html>
