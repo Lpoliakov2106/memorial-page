@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница памяти</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header no-print">
+        <div class="container">
+            <h1 class="app-title">Страница памяти</h1>
+            <div class="controls">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="viewModeToggle">
+                    <span class="toggle-label">Режим просмотра</span>
+                </label>
+                <button id="printBtn" class="btn btn-secondary">Печать</button>
+                <button id="exportBtn" class="btn btn-secondary">Экспорт JSON</button>
+                <button id="importBtn" class="btn btn-secondary">Импорт JSON</button>
+                <button id="resetBtn" class="btn btn-danger">Сбросить демо-данные</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Block -->
+        <section class="hero-section">
+            <figure class="hero-photo">
+                <img id="heroPhoto" src="" alt="Добавьте фото" class="photo-placeholder">
+                <figcaption class="sr-only">Фотография</figcaption>
+            </figure>
+            <div class="hero-info">
+                <h2 id="heroName" class="hero-name">Добавьте имя, чтобы начать</h2>
+                <p id="heroYears" class="hero-years"></p>
+                <blockquote id="heroQuote" class="hero-quote">Добавьте короткое послание или цитату</blockquote>
+                <button id="editProfileBtn" class="btn btn-primary edit-btn">Редактировать профиль</button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="section-header">
+                <h3>О человеке</h3>
+                <button id="editAboutBtn" class="btn btn-secondary edit-btn">Редактировать раздел</button>
+            </div>
+
+            <div class="bio-content">
+                <div class="bio-main">
+                    <h4>Биография</h4>
+                    <p id="bioText" class="bio-text empty-state">Заполните описание</p>
+                </div>
+
+                <div class="bio-structured">
+                    <div class="bio-item">
+                        <h5>Кем был(а)</h5>
+                        <p id="bioRole" class="empty-state">Расскажите, кем был(а)…</p>
+                    </div>
+
+                    <div class="bio-item">
+                        <h5>Что любил(а)</h5>
+                        <p id="bioLoved" class="empty-state">Напишите, что он/она особенно любил(а)…</p>
+                    </div>
+
+                    <div class="bio-item">
+                        <h5>Главное, что важно помнить</h5>
+                        <p id="bioMemory" class="empty-state">Поделитесь тем, что важно сохранить в памяти</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family Tree Section -->
+        <section class="tree-section">
+            <div class="section-header">
+                <h3>Близкие</h3>
+                <button id="addRelativeBtn" class="btn btn-primary edit-btn">Добавить родственника</button>
+            </div>
+            <div id="familyTree" class="family-tree">
+                <p class="empty-state">Добавьте близких в дерево</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer no-print">
+        <div class="container">
+            <p>Страница памяти — MVP для бережного сохранения воспоминаний</p>
+        </div>
+    </footer>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal" role="dialog" aria-labelledby="editProfileTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editProfileTitle">Редактировать профиль</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <form id="editProfileForm" class="modal-body">
+                <div class="form-group">
+                    <label for="profileName">Имя <span class="required">*</span></label>
+                    <input type="text" id="profileName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="profileYears">Годы жизни</label>
+                    <input type="text" id="profileYears" placeholder="например: 1950–2024">
+                </div>
+
+                <div class="form-group">
+                    <label for="profileQuote">Короткая цитата или послание</label>
+                    <textarea id="profileQuote" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="profilePhoto">Фото (URL или оставьте пустым)</label>
+                    <input type="text" id="profilePhoto" placeholder="https://... или оставьте пустым">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit About Modal -->
+    <div id="editAboutModal" class="modal" role="dialog" aria-labelledby="editAboutTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editAboutTitle">Редактировать раздел "О человеке"</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <form id="editAboutForm" class="modal-body">
+                <div class="form-group">
+                    <label for="aboutBio">Биография</label>
+                    <textarea id="aboutBio" rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="aboutRole">Кем был(а)</label>
+                    <textarea id="aboutRole" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="aboutLoved">Что любил(а)</label>
+                    <textarea id="aboutLoved" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="aboutMemory">Главное, что важно помнить</label>
+                    <textarea id="aboutMemory" rows="3"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Relative Modal -->
+    <div id="editRelativeModal" class="modal" role="dialog" aria-labelledby="editRelativeTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editRelativeTitle">Добавить родственника</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <form id="editRelativeForm" class="modal-body">
+                <input type="hidden" id="relativeId">
+
+                <div class="form-group">
+                    <label for="relativeName">Имя <span class="required">*</span></label>
+                    <input type="text" id="relativeName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="relativeRelation">Тип связи <span class="required">*</span></label>
+                    <select id="relativeRelation" required>
+                        <option value="">Выберите тип связи</option>
+                        <option value="мать">мать</option>
+                        <option value="отец">отец</option>
+                        <option value="партнёр">партнёр</option>
+                        <option value="сын">сын</option>
+                        <option value="дочь">дочь</option>
+                        <option value="брат">брат</option>
+                        <option value="сестра">сестра</option>
+                        <option value="внук">внук</option>
+                        <option value="внучка">внучка</option>
+                        <option value="другое">другое</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="relativeYears">Годы жизни</label>
+                    <input type="text" id="relativeYears" placeholder="например: 1970–2020">
+                </div>
+
+                <div class="form-group">
+                    <label for="relativePhoto">Фото (URL или оставьте пустым)</label>
+                    <input type="text" id="relativePhoto">
+                </div>
+
+                <div class="form-group">
+                    <label for="relativeNote">Комментарий</label>
+                    <input type="text" id="relativeNote" placeholder="например: Жили рядом">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
+                    <button type="button" id="deleteRelativeBtn" class="btn btn-danger" style="display: none;">Удалить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="modal" role="dialog" aria-labelledby="importTitle" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="importTitle">Импорт данных</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="importJson">Вставьте JSON данные</label>
+                    <textarea id="importJson" rows="10" placeholder='{"person": {...}, "relatives": [...]}'></textarea>
+                </div>
+                <p class="help-text">Вставьте ранее экспортированный JSON для восстановления данных</p>
+                <div class="modal-actions">
+                    <button type="button" id="importConfirmBtn" class="btn btn-primary">Импортировать</button>
+                    <button type="button" class="btn btn-secondary modal-cancel">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

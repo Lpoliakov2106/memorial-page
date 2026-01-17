@@ -1,0 +1,674 @@
+/* ============================================
+   Базовые стили и переменные
+   ============================================ */
+
+:root {
+    --color-bg: #f5f5f5;
+    --color-text: #2c2c2c;
+    --color-text-light: #666;
+    --color-border: #d0d0d0;
+    --color-primary: #5a7a8f;
+    --color-primary-hover: #4a6a7f;
+    --color-secondary: #8fa0ab;
+    --color-danger: #9f5a5a;
+    --color-danger-hover: #8f4a4a;
+    --color-white: #ffffff;
+    --color-empty: #999;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    --radius: 8px;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ============================================
+   Типографика
+   ============================================ */
+
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 1rem; }
+
+p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.empty-state {
+    color: var(--color-empty);
+    font-style: italic;
+}
+
+.help-text {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+   Хедер
+   ============================================ */
+
+.app-header {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.app-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.app-title {
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* ============================================
+   Кнопки
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    background: var(--color-secondary);
+    color: var(--color-white);
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+}
+
+.btn-danger {
+    background: var(--color-danger);
+}
+
+.btn-danger:hover {
+    background: var(--color-danger-hover);
+}
+
+/* ============================================
+   Toggle Switch
+   ============================================ */
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+}
+
+.toggle-switch input[type="checkbox"] {
+    width: 44px;
+    height: 24px;
+    appearance: none;
+    background: var(--color-border);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+    background: var(--color-primary);
+}
+
+.toggle-switch input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-white);
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}
+
+.toggle-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+
+.hero-section {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.hero-photo {
+    flex-shrink: 0;
+}
+
+.hero-photo img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--color-bg);
+}
+
+.photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-empty);
+}
+
+.hero-info {
+    flex: 1;
+}
+
+.hero-name {
+    margin-bottom: var(--spacing-xs);
+}
+
+.hero-years {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-quote {
+    font-style: italic;
+    border-left: 3px solid var(--color-primary);
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    color: var(--color-text-light);
+}
+
+/* ============================================
+   About Section
+   ============================================ */
+
+.about-section {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.bio-main h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+}
+
+.bio-text {
+    white-space: pre-wrap;
+}
+
+.bio-structured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.bio-item {
+    padding: var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius);
+}
+
+.bio-item h5 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+}
+
+.bio-item p {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* ============================================
+   Family Tree Section
+   ============================================ */
+
+.tree-section {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
+}
+
+.family-tree {
+    min-height: 300px;
+    position: relative;
+    padding: var(--spacing-lg);
+}
+
+.tree-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-md);
+}
+
+.tree-level {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.tree-node {
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    min-width: 150px;
+    max-width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tree-node:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.tree-node.main-person {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    font-weight: 600;
+}
+
+.tree-node-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto var(--spacing-xs);
+    background: var(--color-white);
+}
+
+.tree-node-name {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
+}
+
+.tree-node-relation {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    text-transform: lowercase;
+}
+
+.tree-node.main-person .tree-node-relation {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tree-node-years {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-xs);
+}
+
+.tree-node.main-person .tree-node-years {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   Модальные окна
+   ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    max-width: 600px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-text-light);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.modal-close:hover {
+    background: var(--color-bg);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    justify-content: flex-end;
+}
+
+/* ============================================
+   Формы
+   ============================================ */
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.required {
+    color: var(--color-danger);
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ============================================
+   Футер
+   ============================================ */
+
+.app-footer {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Адаптивность
+   ============================================ */
+
+@media (max-width: 768px) {
+    .app-header .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .controls .btn,
+    .controls .toggle-switch {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-lg);
+    }
+
+    .hero-photo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .bio-structured {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .section-header .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+
+    .modal-content {
+        max-height: 95vh;
+    }
+
+    .tree-node {
+        min-width: 120px;
+    }
+}
+
+/* ============================================
+   Печатные стили
+   ============================================ */
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .no-print,
+    .edit-btn {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .hero-section,
+    .about-section,
+    .tree-section {
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+        page-break-inside: avoid;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-section {
+        padding: var(--spacing-md);
+    }
+
+    .hero-photo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .tree-node {
+        page-break-inside: avoid;
+    }
+
+    .modal {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   Режим просмотра
+   ============================================ */
+
+body.view-mode .edit-btn,
+body.view-mode #exportBtn,
+body.view-mode #importBtn,
+body.view-mode #resetBtn {
+    display: none;
+}
