@@ -1,5 +1,5 @@
 // List Page JavaScript
-// Manages the main page with pages grid
+// Manages the main page with NFT-style pages grid
 
 // ============================================
 // Global Variables
@@ -84,23 +84,23 @@ function renderPageCards(pages) {
     if (pages.length === 0) {
         if (currentSearchQuery) {
             grid.innerHTML = `
-                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px;">
-                    <p style="font-size: 18px; margin-bottom: 16px;">По запросу «${escapeHtml(currentSearchQuery)}» ничего не найдено</p>
+                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 64px;">
+                    <p style="font-size: 18px; margin-bottom: 16px; color: #F1F5F9;">По запросу «${escapeHtml(currentSearchQuery)}» ничего не найдено</p>
                     <button class="btn btn-secondary" onclick="clearSearch()">Сбросить поиск</button>
                 </div>
             `;
         } else {
             grid.innerHTML = `
-                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px;">
-                    <p style="font-size: 18px; margin-bottom: 16px;">Пока нет страниц памяти</p>
-                    <p style="color: #7F8C8D; margin-bottom: 24px;">Создайте первую страницу, чтобы сохранить память о близком человеке</p>
+                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 64px;">
+                    <p style="font-size: 18px; margin-bottom: 16px; color: #F1F5F9;">Коллекция пуста</p>
+                    <p style="color: #94A3B8; margin-bottom: 24px;">Создайте первый токен памяти</p>
                 </div>
             `;
         }
         return;
     }
 
-    grid.innerHTML = pages.map(page => createPageCard(page)).join('');
+    grid.innerHTML = pages.map((page, index) => createPageCard(page, index)).join('');
 
     // Add click handlers to cards
     grid.querySelectorAll('.page-card').forEach(card => {
@@ -116,12 +116,15 @@ function renderPageCards(pages) {
     });
 }
 
-function createPageCard(pageData) {
+function createPageCard(pageData, index) {
     const photoHtml = pageData.photo
         ? `<img src="${escapeHtml(pageData.photo)}" alt="${escapeHtml(pageData.name)}">`
         : `<span>👤</span>`;
 
     const photoClass = pageData.photo ? '' : 'placeholder';
+
+    // Generate NFT-style token ID
+    const tokenId = generateTokenId(pageData.id, index);
 
     return `
         <article class="page-card" data-page-id="${escapeHtml(pageData.id)}">
@@ -134,12 +137,34 @@ function createPageCard(pageData) {
             <h3 class="page-card-name">${escapeHtml(pageData.name || 'Без имени')}</h3>
             <p class="page-card-years">${escapeHtml(pageData.years || '')}</p>
 
+            <p class="page-card-token">#${tokenId}</p>
+
             <div class="page-card-actions">
-                <button class="btn btn-primary" style="width: 100%;">Ознакомиться</button>
-                <button class="btn btn-secondary" style="width: 100%;">Прочитать полностью</button>
+                <button class="btn btn-primary" style="width: 100%;">Открыть токен</button>
             </div>
         </article>
     `;
+}
+
+// ============================================
+// NFT Token ID Generator
+// ============================================
+
+function generateTokenId(id, index) {
+    // Create a unique token ID from page ID
+    const hash = hashCode(id);
+    const tokenNum = Math.abs(hash % 10000).toString().padStart(4, '0');
+    return `EMT-${tokenNum}`;
+}
+
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return hash;
 }
 
 // ============================================

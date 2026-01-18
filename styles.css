@@ -1,31 +1,39 @@
 /* ============================================
-   Memorial Page - Flat Design Styles
-   Based on reference designs
+   Memorial Page - NFT Style Design
+   Symmetrical layout with token effects
    ============================================ */
 
 /* ============================================
    CSS Variables
    ============================================ */
 :root {
-  /* Colors */
-  --color-bg: #F5F7FA;
+  /* Colors - Dark theme for NFT feel */
+  --color-bg: #0a0a0f;
+  --color-bg-secondary: #12121a;
   --color-white: #FFFFFF;
-  --color-primary: #5B8DBE;
-  --color-primary-hover: #4A7BA7;
-  --color-text: #2C3E50;
-  --color-text-light: #7F8C8D;
-  --color-border: #E0E6ED;
-  --color-danger: #E74C3C;
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #7C3AED;
+  --color-accent: #06B6D4;
+  --color-accent-2: #EC4899;
+  --color-text: #F1F5F9;
+  --color-text-light: #94A3B8;
+  --color-border: rgba(255, 255, 255, 0.1);
+
+  /* NFT Gradients */
+  --gradient-nft: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --gradient-card: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+  --gradient-border: linear-gradient(135deg, #8B5CF6, #06B6D4, #EC4899, #8B5CF6);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-nft: 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(6, 182, 212, 0.2);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.5);
 
   /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-full: 50%;
 
   /* Spacing */
@@ -34,9 +42,10 @@
   --spacing-md: 24px;
   --spacing-lg: 32px;
   --spacing-xl: 48px;
+  --spacing-2xl: 64px;
 
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* ============================================
@@ -50,115 +59,359 @@
 
 body {
   font-family: var(--font-family);
-  background-color: var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   min-height: 100vh;
 }
 
 /* ============================================
-   Header Styles
+   Header Styles - Minimal, no title
    ============================================ */
 .site-header {
-  background: var(--color-white);
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
   padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-lg);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  justify-content: center;
 }
 
 .logo-icon {
-  width: 50px;
-  height: 50px;
-  fill: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  fill: url(#logoGradient);
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
 }
 
-.logo-text h1 {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
-}
-
-.logo-text p {
-  font-size: 12px;
-  color: var(--color-text-light);
-  margin: 0;
+/* Hide text in header */
+.logo-text {
+  display: none;
 }
 
 .header-nav {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
+  display: none;
 }
 
-.header-nav a {
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.header-nav a:hover {
-  color: var(--color-primary);
-}
-
-.profile-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
+/* ============================================
+   Hero Section - Centered, Symmetric
+   ============================================ */
+.hero {
   background: var(--color-bg);
+  padding: var(--spacing-2xl) var(--spacing-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: var(--gradient-glow);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero h2 {
+  font-size: 42px;
+  font-weight: 700;
+  background: var(--gradient-nft);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.search-box {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  gap: var(--spacing-xs);
+  background: var(--color-bg-secondary);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  position: relative;
+  z-index: 1;
+}
+
+.search-box input {
+  flex: 1;
   border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.search-box input::placeholder {
+  color: var(--color-text-light);
+}
+
+.search-box button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--gradient-nft);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================================
+   Main Container - Symmetric
+   ============================================ */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Pages Grid - NFT Token Style
+   ============================================ */
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+  justify-content: center;
+}
+
+/* NFT Card Style */
+.page-card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* NFT Border Gradient Effect */
+.page-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-lg);
+  padding: 2px;
+  background: var(--gradient-border);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+/* NFT Glow Effect on Hover */
+.page-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(139, 92, 246, 0.3), transparent, rgba(6, 182, 212, 0.3), transparent);
+  animation: rotate 4s linear infinite paused;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page-card:hover::before {
+  opacity: 1;
+}
+
+.page-card:hover::after {
+  animation-play-state: running;
+  opacity: 1;
+}
+
+.page-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-nft);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card Inner Content */
+.page-card-inner {
+  position: relative;
+  z-index: 2;
+  background: var(--color-bg-secondary);
+  border-radius: calc(var(--radius-lg) - 2px);
+}
+
+.page-card-photo {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto var(--spacing-md);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  transition: background 0.2s;
+  position: relative;
+  z-index: 2;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
 }
 
-.profile-icon:hover {
-  background: var(--color-border);
+.page-card-photo::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-border);
+  z-index: -1;
+}
+
+.page-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-card-photo.placeholder {
+  font-size: 56px;
+  color: var(--color-text-light);
+}
+
+.page-card-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: var(--spacing-xs);
+  position: relative;
+  z-index: 2;
+}
+
+.page-card-years {
+  font-size: 14px;
+  color: var(--color-text-light);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 2;
+}
+
+/* NFT Token ID Style */
+.page-card-token {
+  font-size: 11px;
+  color: var(--color-primary);
+  text-align: center;
+  font-family: monospace;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 2;
+}
+
+.page-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  position: relative;
+  z-index: 2;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--color-text-light);
+  transition: all 0.3s ease;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.favorite-btn:hover,
+.favorite-btn.active {
+  color: #EC4899;
+  background: rgba(236, 72, 153, 0.2);
 }
 
 /* ============================================
    Breadcrumb Navigation
    ============================================ */
 .breadcrumb {
-  background: var(--color-white);
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
   padding: var(--spacing-sm) 0;
 }
 
 .breadcrumb-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  justify-content: center;
+  gap: var(--spacing-lg);
 }
 
 .breadcrumb a,
 .breadcrumb button {
-  color: var(--color-text);
+  color: var(--color-text-light);
   text-decoration: none;
   font-size: 14px;
   background: none;
@@ -173,188 +426,24 @@ body {
   color: var(--color-primary);
 }
 
-.breadcrumb .favorites span {
-  margin-left: 4px;
-  background: var(--color-primary);
-  color: white;
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-}
-
 /* ============================================
-   Hero Section (List Page)
-   ============================================ */
-.hero {
-  background: linear-gradient(to bottom, rgba(91, 141, 190, 0.1), transparent),
-              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23E8F1F8" width="1200" height="400"/></svg>');
-  background-size: cover;
-  background-position: center;
-  padding: var(--spacing-xl) 0;
-  text-align: center;
-}
-
-.hero h2 {
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: var(--spacing-sm);
-}
-
-.hero p {
-  font-size: 16px;
-  color: var(--color-text-light);
-  margin-bottom: var(--spacing-lg);
-}
-
-.search-box {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  gap: var(--spacing-xs);
-  background: var(--color-white);
-  padding: var(--spacing-xs);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
-
-.search-box input {
-  flex: 1;
-  border: none;
-  padding: var(--spacing-sm);
-  font-size: 16px;
-  outline: none;
-  background: transparent;
-}
-
-.search-box button {
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.search-box button:hover {
-  background: var(--color-primary-hover);
-}
-
-/* ============================================
-   Main Container
-   ============================================ */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-md);
-}
-
-/* ============================================
-   Pages Grid (List Page)
-   ============================================ */
-.pages-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--spacing-md);
-  margin: var(--spacing-lg) 0;
-}
-
-.page-card {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-md);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-  position: relative;
-}
-
-.page-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.page-card-photo {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto var(--spacing-sm);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  background: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-card-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.page-card-photo.placeholder {
-  font-size: 48px;
-  color: var(--color-text-light);
-}
-
-.page-card-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-text);
-  text-align: center;
-  margin-bottom: var(--spacing-xs);
-}
-
-.page-card-years {
-  font-size: 14px;
-  color: var(--color-text-light);
-  text-align: center;
-  margin-bottom: var(--spacing-sm);
-}
-
-.page-card-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.favorite-btn {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  color: var(--color-text-light);
-  transition: color 0.2s;
-}
-
-.favorite-btn:hover,
-.favorite-btn.active {
-  color: #E74C3C;
-}
-
-/* ============================================
-   Profile Layout (2-column)
+   Profile Layout - Symmetric 2-column
    ============================================ */
 .profile-layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
 
 /* ============================================
-   Sidebar
+   Sidebar - NFT Style
    ============================================ */
 .sidebar {
-  background: var(--color-white);
+  background: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
   height: fit-content;
   position: sticky;
   top: 80px;
@@ -362,26 +451,28 @@ body {
 
 .sidebar-section {
   margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-section:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .sidebar-section h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
   margin-bottom: var(--spacing-sm);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
 }
 
-.sidebar-section p,
-.sidebar-section .timeline-item {
+.sidebar-section p {
   font-size: 14px;
   color: var(--color-text);
-  margin-bottom: var(--spacing-xs);
 }
 
 .timeline-item {
@@ -392,8 +483,9 @@ body {
 
 .timeline-item .years {
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-accent);
   display: block;
+  font-size: 13px;
 }
 
 .timeline-item .details {
@@ -402,17 +494,18 @@ body {
 }
 
 /* ============================================
-   Main Content Area
+   Main Content Area - NFT Style
    ============================================ */
 .main-content {
-  background: var(--color-white);
+  background: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  position: relative;
 }
 
 /* ============================================
-   Profile Hero
+   Profile Hero - Centered, Symmetric
    ============================================ */
 .profile-hero {
   text-align: center;
@@ -422,27 +515,35 @@ body {
 }
 
 .profile-photo {
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
   border-radius: var(--radius-full);
   object-fit: cover;
   margin: 0 auto var(--spacing-md);
-  background: var(--color-bg);
   display: block;
+  position: relative;
+  border: 4px solid transparent;
+  background: linear-gradient(var(--color-bg-secondary), var(--color-bg-secondary)) padding-box,
+              var(--gradient-border) border-box;
+  box-shadow: var(--shadow-nft);
 }
 
 .profile-photo.placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 72px;
+  font-size: 64px;
   color: var(--color-text-light);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
 }
 
 .profile-info h1 {
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 32px;
+  font-weight: 700;
+  background: var(--gradient-nft);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: var(--spacing-xs);
 }
 
@@ -461,35 +562,37 @@ body {
 }
 
 /* ============================================
-   Tabs
+   Tabs - NFT Style
    ============================================ */
 .tabs {
   display: flex;
-  gap: var(--spacing-md);
-  border-bottom: 2px solid var(--color-border);
+  justify-content: center;
+  gap: var(--spacing-xs);
   margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-sm);
 }
 
 .tab {
-  background: none;
+  background: transparent;
   border: none;
   padding: var(--spacing-sm) var(--spacing-md);
-  font-size: 16px;
+  font-size: 14px;
   color: var(--color-text-light);
   cursor: pointer;
-  position: relative;
-  transition: color 0.2s;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
+  transition: all 0.3s ease;
+  border-radius: var(--radius-md);
+  font-weight: 500;
 }
 
 .tab:hover {
   color: var(--color-text);
+  background: rgba(139, 92, 246, 0.1);
 }
 
 .tab.active {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
+  color: var(--color-white);
+  background: var(--gradient-nft);
   font-weight: 600;
 }
 
@@ -505,7 +608,7 @@ body {
   text-align: center;
   padding: var(--spacing-xl);
   color: var(--color-text-light);
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* ============================================
@@ -513,14 +616,15 @@ body {
    ============================================ */
 .bio-content {
   line-height: 1.8;
+  color: var(--color-text);
 }
 
 .bio-content h4 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-accent);
   margin-bottom: var(--spacing-sm);
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
 .bio-content h4:first-child {
@@ -529,59 +633,62 @@ body {
 
 .bio-content p {
   margin-bottom: var(--spacing-sm);
+  color: var(--color-text-light);
 }
 
 /* ============================================
-   Buttons
+   Buttons - NFT Style
    ============================================ */
 .btn {
   padding: var(--spacing-sm) var(--spacing-md);
   border: none;
   border-radius: var(--radius-md);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: var(--gradient-nft);
   color: white;
 }
 
 .btn-primary:hover {
-  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
 .btn-secondary {
-  background: var(--color-bg);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background: var(--color-border);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-primary);
 }
 
 .btn-danger {
-  background: var(--color-danger);
+  background: linear-gradient(135deg, #EF4444, #DC2626);
   color: white;
-}
-
-.btn-danger:hover {
-  background: #C0392B;
 }
 
 .btn-create {
   display: block;
-  margin: var(--spacing-lg) auto;
+  margin: var(--spacing-xl) auto;
   padding: var(--spacing-md) var(--spacing-xl);
   font-size: 16px;
+  background: var(--gradient-nft);
 }
 
 /* ============================================
-   Modals
+   Modals - NFT Style
    ============================================ */
 .modal {
   display: none;
@@ -590,7 +697,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -601,13 +709,14 @@ body {
 }
 
 .modal-content {
-  background: var(--color-white);
+  background: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   max-width: 600px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-nft);
 }
 
 .modal-header {
@@ -621,7 +730,10 @@ body {
 .modal-header h3 {
   font-size: 20px;
   font-weight: 600;
-  color: var(--color-text);
+  background: var(--gradient-nft);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .modal-close {
@@ -630,12 +742,6 @@ body {
   font-size: 28px;
   color: var(--color-text-light);
   cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: color 0.2s;
 }
 
@@ -655,7 +761,7 @@ body {
 }
 
 /* ============================================
-   Forms
+   Forms - NFT Style
    ============================================ */
 .form-group {
   margin-bottom: var(--spacing-md);
@@ -670,7 +776,7 @@ body {
 }
 
 .form-group .required {
-  color: var(--color-danger);
+  color: var(--color-accent-2);
 }
 
 .form-group input,
@@ -682,7 +788,9 @@ body {
   border-radius: var(--radius-md);
   font-size: 14px;
   font-family: var(--font-family);
-  transition: border-color 0.2s;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus,
@@ -690,6 +798,7 @@ body {
 .form-group select:focus {
   outline: none;
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
 }
 
 .form-group textarea {
@@ -728,16 +837,26 @@ body {
 }
 
 body.edit-mode .edit-mode-only {
-  display: inline-block;
+  display: inline-flex;
 }
 
-.no-print {
-  /* Will hide in print mode */
+/* ============================================
+   Footer
+   ============================================ */
+.app-footer {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
 }
 
 /* ============================================
    Responsive Design
    ============================================ */
+@media (max-width: 1200px) {
+  .pages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 968px) {
   .profile-layout {
     grid-template-columns: 1fr;
@@ -748,26 +867,24 @@ body.edit-mode .edit-mode-only {
   }
 
   .pages-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
   .pages-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero h2 {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .profile-info h1 {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .profile-actions {
@@ -775,8 +892,12 @@ body.edit-mode .edit-mode-only {
   }
 
   .tabs {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb-container {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
   }
 }
 
@@ -795,12 +916,13 @@ body.edit-mode .edit-mode-only {
 
   body {
     background: white;
+    color: black;
   }
 
   .main-content,
   .sidebar {
     box-shadow: none;
-    page-break-inside: avoid;
+    border: 1px solid #ccc;
   }
 
   .profile-layout {
