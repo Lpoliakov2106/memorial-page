@@ -7,31 +7,31 @@
    CSS Variables
    ============================================ */
 :root {
-  /* Colors - Light theme */
-  --color-bg: #F5F7FA;
+  /* Colors - Light theme with more vivid colors */
+  --color-bg: #F0F4F8;
   --color-bg-secondary: #FFFFFF;
   --color-white: #FFFFFF;
-  --color-primary: #5B8DBE;
-  --color-primary-hover: #4A7BA7;
-  --color-accent: #06B6D4;
+  --color-primary: #3B82F6;
+  --color-primary-hover: #2563EB;
+  --color-accent: #0EA5E9;
   --color-accent-2: #EC4899;
-  --color-text: #2C3E50;
-  --color-text-light: #7F8C8D;
-  --color-border: #E0E6ED;
+  --color-text: #1E293B;
+  --color-text-light: #64748B;
+  --color-border: #CBD5E1;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #5B8DBE 0%, #4A7BA7 100%);
-  --gradient-accent: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --gradient-primary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --gradient-accent: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.1);
-  --shadow-lg: 0 4px 16px rgba(0,0,0,0.12);
+  /* Shadows - more pronounced */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Border Radius - more rounded */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-full: 50%;
 
   /* Spacing */
